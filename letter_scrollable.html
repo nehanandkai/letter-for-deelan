@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter to Deelan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #0f0a15 0%, #1a0f25 20%, #0d1a2e 40%, #1a0f20 60%, #0a0f1a 100%);
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background gradient animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(220, 20, 60, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 105, 180, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Rose petals falling */
+        .petal {
+            position: absolute;
+            opacity: 0.4;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .petal:nth-child(1) { left: 5%; animation: fall 8s linear infinite; animation-delay: 0s; }
+        .petal:nth-child(2) { left: 15%; animation: fall 10s linear infinite; animation-delay: 2s; }
+        .petal:nth-child(3) { left: 25%; animation: fall 9s linear infinite; animation-delay: 4s; }
+        .petal:nth-child(4) { left: 80%; animation: fall 11s linear infinite; animation-delay: 1s; }
+        .petal:nth-child(5) { left: 90%; animation: fall 9.5s linear infinite; animation-delay: 3s; }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.5;
+            }
+            95% {
+                opacity: 0.5;
+            }
+            100% {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 750px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(26, 15, 46, 0.95) 0%, rgba(45, 27, 61, 0.95) 25%, rgba(31, 26, 46, 0.95) 50%, rgba(42, 26, 61, 0.95) 75%, rgba(26, 15, 37, 0.95) 100%);
+            border-radius: 12px;
+            border: 1.5px solid rgba(220, 20, 60, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(220, 20, 60, 0.15);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Email header */
+        .email-header {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.12) 0%, rgba(199, 21, 133, 0.12) 100%);
+            padding: 30px 35px;
+            border-bottom: 1px solid rgba(255, 105, 180, 0.25);
+            backdrop-filter: blur(5px);
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .email-from {
+            font-size: 13px;
+            color: #b8a3d0;
+        }
+
+        .from-name {
+            color: #ff69b4;
+            font-weight: 600;
+        }
+
+        .header-icon {
+            font-size: 18px;
+        }
+
+        .email-subject {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff69b4 0%, #dc143c 50%, #ba55d3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 12px;
+        }
+
+        .email-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #8b7ba8;
+        }
+
+        /* Email body */
+        .email-body {
+            padding: 40px 35px;
+            color: #d4c5e0;
+            line-height: 1.85;
+            font-size: 15px;
+        }
+
+        .greeting {
+            font-size: 16px;
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        .greeting-name {
+            color: #ff69b4;
+            font-weight: 600;
+        }
+
+        .content-block {
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .highlight {
+            color: #ff69b4;
+            font-weight: 500;
+        }
+
+        .em {
+            color: #ff6ec7;
+            font-style: italic;
+        }
+
+        .strong {
+            color: #ff69b4;
+            font-weight: 600;
+        }
+
+        .divider-text {
+            text-align: center;
+            margin: 32px 0;
+            opacity: 0.4;
+            font-size: 16px;
+            color: #ba55d3;
+        }
+
+        /* Email signature */
+        .email-signature {
+            padding: 32px 35px;
+            border-top: 1px solid rgba(220, 20, 60, 0.3);
+            background: linear-gradient(135deg, rgba(139, 0, 139, 0.08) 0%, rgba(220, 20, 60, 0.08) 100%);
+            backdrop-filter: blur(5px);
+        }
+
+        .sign-off {
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #d4c5e0;
+        }
+
+        .signature-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff69b4, #dc143c, #ba55d3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Email footer */
+        .email-footer {
+            padding: 18px 35px;
+            background: rgba(0, 0, 0, 0.4);
+            border-top: 1px solid rgba(255, 105, 180, 0.15);
+            font-size: 12px;
+            color: #8b7ba8;
+            text-align: right;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .container {
+                border-radius: 10px;
+            }
+
+            .email-header {
+                padding: 22px 25px;
+            }
+
+            .email-body {
+                padding: 28px 25px;
+            }
+
+            .email-signature {
+                padding: 24px 25px;
+            }
+
+            .email-footer {
+                padding: 14px 25px;
+            }
+
+            .email-subject {
+                font-size: 22px;
+            }
+
+            .signature-name {
+                font-size: 24px;
+            }
+
+            .content-block {
+                font-size: 14px;
+            }
+
+            .petal {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .container {
+                border-radius: 8px;
+            }
+
+            .email-header {
+                padding: 18px 20px;
+            }
+
+            .email-body {
+                padding: 20px;
+                font-size: 14px;
+            }
+
+            .email-signature {
+                padding: 18px 20px;
+            }
+
+            .email-footer {
+                padding: 12px 20px;
+                font-size: 11px;
+            }
+
+            .email-subject {
+                font-size: 18px;
+            }
+
+            .signature-name {
+                font-size: 20px;
+            }
+
+            .greeting {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+
+            .content-block {
+                margin-bottom: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="petal">🌹</div>
+    <div class="petal">🌹</div>
+    <div class="petal">🌹</div>
+    <div class="petal">🌹</div>
+    <div class="petal">🌹</div>
+
+    <div class="container">
+        <div class="email-header">
+            <div class="header-row">
+                <div class="email-from">
+                    From: <span class="from-name">Nehan</span>
+                </div>
+                <div class="header-icon">📌</div>
+            </div>
+            <div class="email-subject">To The Person Who Changed Everything</div>
+            <div class="email-meta">
+                <span>Just now</span>
+                <span>Important</span>
+            </div>
+        </div>
+
+        <div class="email-body">
+            <div class="greeting">
+                <span class="greeting-name">Deelan,</span>
+            </div>
+
+            <div class="content-block">
+                I've been staring at my phone for like 20 minutes now trying to figure out how to say this without sounding like a total sap. Fuck it though, I need you to actually hear it.
+            </div>
+
+            <div class="content-block">
+                Back when I was younger I didn't really get what it meant to care about someone. Not the surface stuff — but <span class="highlight">noticing how your face lights up when you're hyped about something</span>, or actually listening instead of just waiting for my turn to speak.
+            </div>
+
+            <div class="content-block">
+                I always thought <span class="em">"love"</span> was just some big dramatic movie thing. Turns out it's quieter. And way better.
+            </div>
+
+            <div class="divider-text">✦</div>
+
+            <div class="content-block">
+                You don't get told this enough (probably never), but you're different, man. You make shit feel <span class="highlight">easy</span>. No fake smiles, no wondering if your head's somewhere else mid-convo. You're just... <span class="strong">there</span>. That hits different, lowkey.
+            </div>
+
+            <div class="content-block">
+                I never expected any of this. I figured I'd keep doing the same loop — wake up, work, scroll, sleep, repeat like some half-broken robot. But then you came along and now I <span class="highlight">actually want to be better</span>. Want to send you random dumb shit just to see what you reply. It's brutal how much I just want you around.
+            </div>
+
+            <div class="divider-text">✦</div>
+
+            <div class="content-block">
+                You've changed how I see myself too. Before it was just going through the motions, work and whatever. Now there's this <span class="em">little spark or something</span>.
+            </div>
+
+            <div class="content-block">
+                You matter to me, Deelan. Not for the stuff you do or whatever — js because <span class="strong">you're you</span>. The way you laugh at my stupid jokes, the way you get me without even trying. No larp, straight up.
+            </div>
+
+            <div class="content-block">
+                On Kirk, I <span class="strong">love you</span>. Not the trial version or some mid bullshit. The real thing. You <span class="highlight">mog everything else, fr</span>.
+            </div>
+        </div>
+
+        <div class="email-signature">
+            <div class="sign-off">Your man,</div>
+            <div class="signature-name">Nehan</div>
+        </div>
+
+        <div class="email-footer">
+            Sent with feelings that can't be unsaid 💗
+        </div>
+    </div>
+
+</body>
+</html>
